@@ -1,11 +1,17 @@
-async function getData(username, api_url, match_url){
-    const response= await fetch(api_url);
-    const match_response = await fetch(match_url);
+async function fetchData(username, mmr_url, match_url){
+    const MMR_RESPONSE= await fetch(mmr_url);
+    const MATCH_RESPONSE = await fetch(match_url);
 
-    const data= await response.json();
-    const match_data = await match_response.json();
+    const MMR_JSON = await MMR_RESPONSE.json();
+    const MATCH_JSON = await MATCH_RESPONSE.json();
 
-    match_info = match_data.data;
+    const MATCH_HISTORY = MATCH_JSON.data;
+    const MMR_HISTORY = MMR_JSON.data;
+
+    createHistoryList(MATCH_HISTORY, MMR_HISTORY);
+}
+
+function createHistoryList(matchInfo) {
     matches_length = match_info.length;
 
     datamain = data.data;
@@ -48,7 +54,5 @@ function getVData() {
     const match_api_url = 
     `https://api.henrikdev.xyz/valorant/v3/matches/na/${username}/${tagline}`
 
-
-
-    getData(username, api_url, match_api_url);
+    fetchData(username, api_url, match_api_url);
 }
