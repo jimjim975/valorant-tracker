@@ -1,0 +1,23 @@
+input {
+    text-align: center;
+}
+
+button {
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+ol.center {
+    list-style-type:decimal;
+    list-style-position: inside;
+    padding-left: inherit; /*Get rid of padding to center correctly*/
+    position:relative;
+}
