@@ -1,30 +1,18 @@
-async function fetchData(username, mmr_url, match_url){
-    const MMR_RESPONSE= await fetch(mmr_url);
-    const MATCH_RESPONSE = await fetch(match_url);
+function createHistoryList(username, matchResults, mmrResults) {
+    // matches_length = match_info.length;
 
-    const MMR_JSON = await MMR_RESPONSE.json();
-    const MATCH_JSON = await MATCH_RESPONSE.json();
+    // datamain = data.data;
+    // length = datamain.length;
+    // let rank='<ol class="center">';
+    // let complist = [];
+    // for(i= 0; i < matches_length; i++) {
+    //     temp = match_info[i].metadata.mode;
+    //     if (temp == 'Competitive') {
+    //         complist.push(match_info[i]);
+    //     }
+    // }
 
-    const MATCH_HISTORY = MATCH_JSON.data;
-    const MMR_HISTORY = MMR_JSON.data;
-
-    createHistoryList(MATCH_HISTORY, MMR_HISTORY);
-}
-
-function createHistoryList(matchInfo) {
-    matches_length = match_info.length;
-
-    datamain = data.data;
-    length = datamain.length;
-    var rank='<ol class="center">';
-    complist = [];
-    for(i= 0; i < matches_length; i++) {
-        temp = match_info[i].metadata.mode;
-        if (temp == 'Competitive') {
-            complist.push(match_info[i]);
-        }
-    }
-    playerinfo = []; 
+    let playerinfo = []; 
     for (i = 0; i < complist.length; i++) {
         players_length = complist[i].players.all_players.length;
         for (j = 0; j < players_length; j++) {
@@ -46,13 +34,3 @@ function createHistoryList(matchInfo) {
     document.getElementById("rank").innerHTML=rank;
 }
 
-function getVData() {
-    const username = document.getElementById('username').value;
-    const tagline = document.getElementById('tagline').value;
-    const api_url = 
-    `https://api.henrikdev.xyz/valorant/v1/mmr-history/na/${username}/${tagline}`;
-    const match_api_url = 
-    `https://api.henrikdev.xyz/valorant/v3/matches/na/${username}/${tagline}`
-
-    fetchData(username, api_url, match_api_url);
-}
