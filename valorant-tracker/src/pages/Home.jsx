@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getMmrData } from '../api/controller';
 
 function Home() {
   const [info, setInfo] = useState({});
@@ -9,10 +10,11 @@ function Home() {
     setInfo(values => ({...values, [name]: value}));
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(info);
+    const matches = await getMmrData(info.username, info.tag);
     setInfo({});
+    console.log(matches);
   }
   
   return (
